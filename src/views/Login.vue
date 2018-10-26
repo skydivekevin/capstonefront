@@ -1,16 +1,16 @@
 <template>
   <div>
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-      <b-form-group id="exampleInputGroup1"
+      <b-form-group id="usernameGroup"
                     label="Username:"
                     label-for="exampleInput1">
         <b-form-input id="username"
                       type="text"
-                      v-model="form.text"
+                      v-model="form.username"
                       required
                       placeholder="Enter username">
         </b-form-input>
-      <b-form-group id="exampleInputGroup2"
+      <b-form-group id="passwordGroup"
                     label="Password:"
                     label-for="exampleInput2">
         <b-form-input id="password"

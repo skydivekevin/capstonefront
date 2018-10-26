@@ -7,7 +7,7 @@
                     description="Please enter your desired username">
         <b-form-input id="username"
                       type="text"
-                      v-model="form.text"
+                      v-model="form.username"
                       required
                       placeholder="Enter username">
         </b-form-input>
@@ -17,7 +17,7 @@
                     label-for="firstName">
         <b-form-input id="firstName"
                       type="text"
-                      v-model="form.name"
+                      v-model="form.firstname"
                       required
                       placeholder="First name">
         </b-form-input>
@@ -27,7 +27,7 @@
                     label-for="lastName">
         <b-form-input id="lastName"
                       type="text"
-                      v-model="form.name"
+                      v-model="form.lastname"
                       required
                       placeholder="Last name">
         </b-form-input>
@@ -59,8 +59,9 @@ export default {
   data() {
     return {
       form: {
-        email: '',
-        name: '',
+        username: '',
+        firstname: '',
+        lastname: '',
         dropzone: null
       },
       selected: 'student',
