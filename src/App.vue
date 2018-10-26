@@ -2,11 +2,22 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/login">Login</router-link> |
+      <router-link to="/signup">Sign up</router-link> |
+      <router-link to="/seereview">See reviews</router-link> |
+      <router-link to="/writereview">Write a review</router-link>
     </div>
     <router-view/>
   </div>
 </template>
+
+<script>
+export default {};
+</script>
+
+
+
+
 
 <style>
 #app {
