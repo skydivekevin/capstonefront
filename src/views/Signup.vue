@@ -34,18 +34,18 @@
       </b-form-group>
       <b-form-group id="dropzoneGroup"
                     label="Dropzone:"
-                    label-for="dropzone">
+                    label-for="dropzone"
+                    v-if='form.usertype === "instructor"'>
         <b-form-select id="dropzone"
                       :options="dropzones"
                       required
                       v-model="form.dropzone">
         </b-form-select>
       </b-form-group>
-
     <b-form-group >
-      <b-form-radio-group v-model="selected"
+      <b-form-radio-group v-model="form.usertype"
                           :options="options"
-                          name="radioInline">
+                          name="options">
       </b-form-radio-group>
     </b-form-group>
       <b-button type="submit" variant="primary">Submit</b-button>
@@ -62,7 +62,8 @@ export default {
         username: '',
         firstname: '',
         lastname: '',
-        dropzone: null
+        dropzone: null,
+        usertype: 'student'
       },
       selected: 'student',
       options: [
@@ -83,13 +84,18 @@ export default {
     onSubmit(evt) {
       evt.preventDefault();
       alert(JSON.stringify(this.form));
-    },
-    onReset(evt) {
-      evt.preventDefault();
-      /* Reset our form values */
       this.form.email = '';
       this.form.name = '';
       this.form.dropzone = null;
+      this.form.usertype = 'student';
+    },
+    onReset(evt) {
+      evt.preventDefault();
+
+      this.form.email = '';
+      this.form.name = '';
+      this.form.dropzone = null;
+      this.form.usertype = 'student';
       /* Trick to reset/clear native browser form validation state */
       this.show = false;
       this.$nextTick(() => {

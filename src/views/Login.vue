@@ -42,6 +42,8 @@ export default {
     onSubmit(evt) {
       evt.preventDefault();
       alert(JSON.stringify(this.form));
+      this.form.username = '';
+      this.form.password = '';
     },
     onReset(evt) {
       evt.preventDefault();
