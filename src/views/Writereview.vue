@@ -35,6 +35,7 @@
       <b-button type="reset" variant="outline-primary">Reset</b-button>
       
     </b-form>
+
   </div>
 </template>
 
@@ -42,6 +43,7 @@
 export default {
   data() {
     return {
+      locations: [],
       form: {
         dropzone: null,
         instructor: null,
@@ -64,6 +66,14 @@ export default {
       review: '',
       show: true
     };
+  },
+  mounted() {
+    const apiURL = 'http://localhost:5000/locations';
+    fetch(apiURL)
+      .then(response => response.json())
+      .then(result => {
+        this.locations = result;
+      });
   },
   methods: {
     onSubmit(evt) {

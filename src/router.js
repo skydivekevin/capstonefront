@@ -39,7 +39,8 @@ export default new Router({
     {
       path: '/addinstructor',
       name: 'Addinstructor',
-      component: Addinstructor
+      component: Addinstructor,
+      props: true
     },
   ]
 })
