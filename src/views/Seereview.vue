@@ -1,12 +1,19 @@
 <template>
   <div>
     <h1>Seereview.vue</h1>
+    <SelectDz />
+
 
   </div>
 </template>
 
 <script>
-export default {};
+import SelectDz from '../components/SelectDz';
+export default {
+  components: {
+    SelectDz
+  }
+};
 </script>
 
 

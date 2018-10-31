@@ -6,6 +6,7 @@ import Home from './views/Home.vue'
 import Seereview from './views/Seereview.vue'
 import Writereview from './views/Writereview.vue'
 import Addinstructor from './views/Addinstructor.vue'
+import DzPage from './views/DzPage.vue'
 
 Vue.use(Router)
 
@@ -40,7 +41,11 @@ export default new Router({
       path: '/addinstructor',
       name: 'Addinstructor',
       component: Addinstructor,
-      props: true
+    },
+    {
+      path: '/dzpage',
+      name: 'dzpage',
+      component: DzPage,
     },
   ]
 })

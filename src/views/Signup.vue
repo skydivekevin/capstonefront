@@ -88,10 +88,6 @@ export default {
     onSubmit(evt) {
       evt.preventDefault();
       alert(JSON.stringify(this.form));
-      this.form.email = '';
-      this.form.name = '';
-      this.form.dropzone = null;
-      this.form.usertype = 'student';
     },
     onReset(evt) {
       evt.preventDefault();
