@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1>Seereview.vue</h1>
     <SelectDz />
+
 
 
   </div>

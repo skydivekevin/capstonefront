@@ -5,10 +5,12 @@
         label="Dropzone:"
         label-for="dropzone">
         <b-form-select id="dropzone"
-          :options="dropzones"
+          :options="locations"
           required
-          v-model="form.dropzone">
+          v-model="form.dropzone"
+          @input="instructorSelect">
         </b-form-select>
+        <p>Can't find Dropzone? <router-link to="/adddropzone">Add a Dropzone</router-link></p>
       </b-form-group>
       <b-form-group id="instructorGroup"
         label="Instructor:"
@@ -20,8 +22,6 @@
         </b-form-select>
       </b-form-group>
       <p>Can't find your instructor? <router-link to="/addinstructor">Add an instructor</router-link></p>
-      
-
     <b-form-textarea id="review"
       v-model="form.review"
       placeholder="Write review here"
@@ -30,10 +30,8 @@
       >
     </b-form-textarea>
     <pre class="mt-3">{{ review }}</pre>
-
         <b-button type="submit" variant="primary">Submit</b-button>
       <b-button type="reset" variant="outline-primary">Reset</b-button>
-      
     </b-form>
 
   </div>
@@ -49,30 +47,18 @@ export default {
         instructor: null,
         review: null
       },
-      dropzones: [
-        { text: 'Select your dropzone', value: null },
-        'Mile-Hi',
-        'Skydive Hawaii',
-        'Skydive Cumberland',
-        'Skydive Galveston'
-      ],
-      instructors: [
-        { text: 'Select your instructor', value: null },
-        'Kevin Potts',
-        'Jeff Stagg',
-        'Brian Moler',
-        'John Wheldon'
-      ],
+      instructors: [],
       review: '',
       show: true
     };
   },
   mounted() {
-    const apiURL = 'http://localhost:5000/locations';
+    let apiURL = 'http://localhost:5000/locations';
     fetch(apiURL)
       .then(response => response.json())
       .then(result => {
-        this.locations = result;
+        let answer = result.result.map(value => value.dzName);
+        this.locations = answer;
       });
   },
   methods: {
@@ -94,6 +80,20 @@ export default {
       this.$nextTick(() => {
         this.show = true;
       });
+    },
+    instructorSelect() {
+      let selectedDz = this.form.dropzone;
+      console.log(selectedDz);
+      let apiURL = 'http://localhost:5000/instructors/' + selectedDz;
+      console.log(apiURL);
+      fetch(apiURL)
+        .then(response => response.json())
+        .then(result => {
+          let answer = result.result.map(
+            value => `${value.firstName} ${value.lastName}`
+          );
+          this.instructors = answer;
+        });
     }
   }
 };

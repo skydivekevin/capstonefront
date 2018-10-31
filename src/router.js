@@ -6,6 +6,7 @@ import Home from './views/Home.vue'
 import Seereview from './views/Seereview.vue'
 import Writereview from './views/Writereview.vue'
 import Addinstructor from './views/Addinstructor.vue'
+import AddDropzone from './views/AddDropzone.vue'
 import DzPage from './views/DzPage.vue'
 
 Vue.use(Router)
@@ -41,6 +42,11 @@ export default new Router({
       path: '/addinstructor',
       name: 'Addinstructor',
       component: Addinstructor,
+    },
+    {
+      path: '/adddropzone',
+      name: 'AddDropzone',
+      component: AddDropzone,
     },
     {
       path: '/dzpage',

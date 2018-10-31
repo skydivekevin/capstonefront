@@ -1,26 +1,25 @@
 <template>
   <div>
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-      <b-form-group id="dropzoneGroup"
-        label="Dropzone:"
-        label-for="dropzone">
-        <b-form-select id="dropzone"
-          :options="locations"
-          required
-          v-model="form.currentDZ">
-        </b-form-select>
-      </b-form-group>
     <div>
-      <b-form-input v-model="form.firstName"
+      <b-form-input v-model="form.dzName"
         type="text"
-        placeholder="Enter instructor's first name"
-        id="firstname"></b-form-input>
+        placeholder="Enter dropzone name"
+        id="dzName"></b-form-input>
     </div>
     <div>
-      <b-form-input v-model="form.lastName"
+      <b-form-input v-model="form.dzCity"
         type="text"
-        placeholder="Enter instructor's last name"
-        id="lastname"></b-form-input>
+        placeholder="Enter dropzone city"
+        id="dzCity">
+        </b-form-input>
+    </div>
+        <div>
+      <b-form-input v-model="form.dzState"
+        type="text"
+        placeholder="Enter dropzone state"
+        id="dzState">
+        </b-form-input>
     </div>
     <b-button type="submit" variant="primary">Submit</b-button>
     <b-button type="reset" variant="outline-primary">Reset</b-button>
@@ -34,36 +33,25 @@
 export default {
   data() {
     return {
-      locations: [],
       form: {
-        currentDZ: null,
-        firstName: null,
-        lastName: null
+        dzName: null,
+        dzCity: null,
+        dzState: null
       },
       show: true
     };
-  },
-  mounted() {
-    let apiURL = 'http://localhost:5000/locations';
-    fetch(apiURL)
-      .then(response => response.json())
-      .then(result => {
-        // console.log(result.result[0]['dzName']);
-        console.log(result);
-        let answer = result.result.map(value => value.dzName);
-        this.locations = answer;
-      });
   },
 
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
-      this.form.fullName = `${this.form.firstName} ${this.form.lastName}`;
       let form = JSON.stringify(this.form);
-      this.form.dropzone = null;
-      this.form.newInstructor = null;
+      console.log(form);
+      // this.form.dropzone = null;
+      // this.form.newInstructor = null;
 
-      const url = 'http://localhost:5000/instructors';
+      const url = 'http://localhost:5000/locations';
+      console.log(url);
 
       var postOptions = {
         method: 'POST',
@@ -99,10 +87,13 @@ export default {
 </script>
 
 <style scoped>
-#firstname {
+#dzName {
   margin-bottom: 20px;
 }
-#lastname {
+#dzCity {
+  margin-bottom: 20px;
+}
+#dzState {
   margin-bottom: 20px;
 }
 </style>

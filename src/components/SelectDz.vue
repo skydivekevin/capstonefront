@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-form @submit="onSubmit" v-if="show">
+    <b-form v-if="show">
       <b-form-group id="dropzoneGroup"
         label="Dropzone:"
         label-for="dropzone">
@@ -17,18 +17,24 @@
         <b-form-select id="instructor"
           :options="instructors"
           required
-          v-model="form.instructor">
+          v-model="form.instructor"
+          @input="showReviews">
         </b-form-select>
       </b-form-group>
     <b-form-group >
     </b-form-group>
-      <b-button type="submit" variant="primary">Submit</b-button>
+      <!-- <b-button type="submit" variant="primary">Submit</b-button> -->
     </b-form>
+    <ReviewCard />
   </div>
 </template>
 
 <script>
+import ReviewCard from './ReviewCard';
 export default {
+  components: {
+    ReviewCard
+  },
   data() {
     return {
       locations: [],
@@ -44,24 +50,16 @@ export default {
     fetch(apiURL)
       .then(response => response.json())
       .then(result => {
-        console.log(result);
         let answer = result.result.map(value => value.dzName);
-        console.log(answer);
         this.locations = answer;
       });
   },
   methods: {
-    onSubmit(evt) {
-      evt.preventDefault();
-      alert(JSON.stringify(this.form));
-      // this.form.dropzone = null;
-      /////////   PULL INFO FROM SUBMIT AND DO QUERY TO SHOW ALL REVIEWS FOR SELECTED DZ (locationJumped in reviews collection)     ///////////
-    },
     instructorSelect() {
       let selectedDz = this.form.dropzone;
-      console.log(selectedDz);
+      // console.log(selectedDz);
       let apiURL = 'http://localhost:5000/instructors/' + selectedDz;
-      console.log(apiURL);
+      // console.log(apiURL);
       fetch(apiURL)
         .then(response => response.json())
         .then(result => {
@@ -69,6 +67,27 @@ export default {
             value => `${value.firstName} ${value.lastName}`
           );
           this.instructors = answer;
+        });
+    },
+    showReviews() {
+      ////////////      FETCH ALL REVIEWS FOR SELECTED INSTRUCTOR    /////////
+      let selectedInstructor = this.form.instructor;
+      let separated = selectedInstructor.split(' ');
+      let last = separated[1];
+      let first = separated[0];
+
+      let apiURL = 'http://localhost:5000/reviews/' + first + '/' + last;
+      // console.log(apiURL);
+      fetch(apiURL)
+        .then(response => response.json())
+        .then(result => {
+          console.log(result);
+
+          //push those into array just like instructors and shit
+          // let answer = result[result];
+          // console.log(answer);
+          // let answer = result.map(value => value.review);
+          // console.log(answer);
         });
     }
   }
