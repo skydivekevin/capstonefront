@@ -1,7 +1,6 @@
 <template>
-<div>
-  This is the review card
-</div>
+      <li></li>
+
 </template>
 
 <script>
@@ -11,7 +10,8 @@ export default {
   data() {
     return {};
   },
-  methods: {}
+  methods: {},
+  props: ['review']
 };
 </script>
 

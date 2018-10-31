@@ -1,6 +1,7 @@
 <template>
   <div>
-    <SelectDz />
+  <SelectDz />
+  <ReviewCard />
 
 
 
@@ -9,9 +10,11 @@
 
 <script>
 import SelectDz from '../components/SelectDz';
+import ReviewCard from '../components/ReviewCard';
 export default {
   components: {
-    SelectDz
+    SelectDz,
+    ReviewCard
   }
 };
 </script>

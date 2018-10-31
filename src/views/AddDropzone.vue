@@ -46,7 +46,6 @@ export default {
     onSubmit(evt) {
       evt.preventDefault();
       let form = JSON.stringify(this.form);
-      console.log(form);
       // this.form.dropzone = null;
       // this.form.newInstructor = null;
 
@@ -69,6 +68,7 @@ export default {
         .catch(function(error) {
           console.log(error);
         });
+      this.$router.push('Writereview');
     },
     onReset(evt) {
       evt.preventDefault();

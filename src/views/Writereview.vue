@@ -126,14 +126,12 @@ export default {
         });
     },
     splitInstructorName() {
-      console.log(this.form.instructor);
       let selectedInstructor = this.form.instructor;
       let separated = selectedInstructor.split(' ');
       let last = separated[1];
       let first = separated[0];
       this.form.instructorFirst = first;
       this.form.instructorLast = last;
-      console.log(this.form);
     }
   }
 };

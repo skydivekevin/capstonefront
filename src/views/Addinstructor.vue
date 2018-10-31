@@ -79,6 +79,7 @@ export default {
         .catch(function(error) {
           console.log(error);
         });
+      this.$router.push('Writereview');
     },
     onReset(evt) {
       evt.preventDefault();

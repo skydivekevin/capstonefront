@@ -23,19 +23,21 @@
       </b-form-group>
     <b-form-group >
     </b-form-group>
-      <!-- <b-button type="submit" variant="primary">Submit</b-button> -->
     </b-form>
-    <ul>
-      <li v-for='(review, index) in reviews' v-bind:key='"review" + index' :review='review' >{{review}} </li>
-    </ul>
+    <div v-if='reviews.length > 0' v-for="(review, index) in reviews" v-bind:key='"review" + index' :review='review'>
+      <ul>
+        <li>{{review}}</li>
+        
+      </ul>
+    </div>
   </div>
 </template>
 
 <script>
-import ReviewCard from './ReviewCard';
+// import ReviewCard from './ReviewCard';
 export default {
   components: {
-    ReviewCard
+    // ReviewCard
   },
   data() {
     return {
@@ -60,9 +62,7 @@ export default {
   methods: {
     instructorSelect() {
       let selectedDz = this.form.dropzone;
-      // console.log(selectedDz);
       let apiURL = 'http://localhost:5000/instructors/' + selectedDz;
-      // console.log(apiURL);
       fetch(apiURL)
         .then(response => response.json())
         .then(result => {
@@ -80,7 +80,6 @@ export default {
       let first = separated[0];
 
       let apiURL = 'http://localhost:5000/reviews/' + first + '/' + last;
-      // console.log(apiURL);
       fetch(apiURL)
         .then(response => response.json())
         .then(result => {
@@ -95,5 +94,10 @@ export default {
 <style scoped>
 ul {
   margin: 20px;
+  list-style-type: none;
+}
+
+li {
+  list-style-type: none;
 }
 </style>

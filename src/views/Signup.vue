@@ -79,7 +79,6 @@ export default {
     fetch(apiURL)
       .then(response => response.json())
       .then(result => {
-        // console.log(result.result[0]['dzName']);
         let answer = result.result.map(value => value.dzName);
         this.locations = answer;
       });
