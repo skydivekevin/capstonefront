@@ -9,9 +9,7 @@ export default {
   name: 'ReviewCard',
 
   data() {
-    return {
-      showInfo: false
-    };
+    return {};
   },
   methods: {}
 };

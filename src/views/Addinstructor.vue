@@ -48,8 +48,6 @@ export default {
     fetch(apiURL)
       .then(response => response.json())
       .then(result => {
-        // console.log(result.result[0]['dzName']);
-        console.log(result);
         let answer = result.result.map(value => value.dzName);
         this.locations = answer;
       });

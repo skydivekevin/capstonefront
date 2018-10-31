@@ -25,7 +25,9 @@
     </b-form-group>
       <!-- <b-button type="submit" variant="primary">Submit</b-button> -->
     </b-form>
-    <ReviewCard />
+    <ul>
+      <li v-for='(review, index) in reviews' v-bind:key='"review" + index' :review='review' >{{review}} </li>
+    </ul>
   </div>
 </template>
 
@@ -39,6 +41,7 @@ export default {
     return {
       locations: [],
       instructors: [],
+      reviews: [],
       form: {
         // dropzone: null
       },
@@ -81,13 +84,8 @@ export default {
       fetch(apiURL)
         .then(response => response.json())
         .then(result => {
-          console.log(result);
-
-          //push those into array just like instructors and shit
-          // let answer = result[result];
-          // console.log(answer);
-          // let answer = result.map(value => value.review);
-          // console.log(answer);
+          let answer = result.result.map(value => value.review);
+          this.reviews = answer;
         });
     }
   }
@@ -95,4 +93,7 @@ export default {
 </script>
 
 <style scoped>
+ul {
+  margin: 20px;
+}
 </style>

@@ -1,13 +1,25 @@
 <template>
   <div>
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+      <b-form-group id="reviewerGroup"
+        label="Your name:"
+        label-for="reviewerName">
+
+      <b-form-input v-model="form.reviewerName"
+        type="text"
+        placeholder="What's your name?"
+        id="reviewerName">
+        </b-form-input>
+         </b-form-group>
+
+
       <b-form-group id="dropzoneGroup"
         label="Dropzone:"
         label-for="dropzone">
         <b-form-select id="dropzone"
           :options="locations"
           required
-          v-model="form.dropzone"
+          v-model="form.locationJumped"
           @input="instructorSelect">
         </b-form-select>
         <p>Can't find Dropzone? <router-link to="/adddropzone">Add a Dropzone</router-link></p>
@@ -18,7 +30,8 @@
         <b-form-select id="instructor"
           :options="instructors"
           required
-          v-model="form.instructor">
+          v-model="form.instructor"
+          @input="splitInstructorName">
         </b-form-select>
       </b-form-group>
       <p>Can't find your instructor? <router-link to="/addinstructor">Add an instructor</router-link></p>
@@ -43,7 +56,7 @@ export default {
     return {
       locations: [],
       form: {
-        dropzone: null,
+        locationJumped: null,
         instructor: null,
         review: null
       },
@@ -64,15 +77,34 @@ export default {
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
-      alert(JSON.stringify(this.form));
-      this.form.dropzone = null;
+      let form = JSON.stringify(this.form);
+      const url = 'http://localhost:5000/reviews';
+
+      var postOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: form
+      };
+
+      fetch(url, postOptions)
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(data) {
+          console.log(data);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+
+      this.form.locationJumped = null;
       this.form.instructor = null;
       this.form.review = null;
     },
     onReset(evt) {
       evt.preventDefault();
       /* Reset our form values */
-      this.form.dropzone = null;
+      this.form.locationJumped = null;
       this.form.instructor = null;
       this.form.review = null;
       /* Trick to reset/clear native browser form validation state */
@@ -82,10 +114,8 @@ export default {
       });
     },
     instructorSelect() {
-      let selectedDz = this.form.dropzone;
-      console.log(selectedDz);
+      let selectedDz = this.form.locationJumped;
       let apiURL = 'http://localhost:5000/instructors/' + selectedDz;
-      console.log(apiURL);
       fetch(apiURL)
         .then(response => response.json())
         .then(result => {
@@ -94,6 +124,16 @@ export default {
           );
           this.instructors = answer;
         });
+    },
+    splitInstructorName() {
+      console.log(this.form.instructor);
+      let selectedInstructor = this.form.instructor;
+      let separated = selectedInstructor.split(' ');
+      let last = separated[1];
+      let first = separated[0];
+      this.form.instructorFirst = first;
+      this.form.instructorLast = last;
+      console.log(this.form);
     }
   }
 };
