@@ -9,6 +9,8 @@ import Addinstructor from './views/Addinstructor.vue'
 import AddDropzone from './views/AddDropzone.vue'
 import DzPage from './views/DzPage.vue'
 import UserPage from './views/UserPage.vue'
+import AddDropzone1 from './views/AddDropzone1.vue'
+
 
 Vue.use(Router)
 
@@ -55,11 +57,11 @@ export default new Router({
       name: 'dzpage',
       component: DzPage,
     },
-    // {
-    //   path: '/UserPage',
-    //   name: 'UserPage',
-    //   component: UserPage,
-    // },
+    {
+      path: '/AddDropzone1',
+      name: 'AddDropzone1',
+      component: AddDropzone1,
+    },
     {
       path: '/users/:userName/',
       name: 'UserPage',

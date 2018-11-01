@@ -49,7 +49,7 @@ export default {
       // this.form.newInstructor = null;
 
       const url = 'http://localhost:5000/locations';
-      console.log(url);
+      // console.log(url);
 
       var postOptions = {
         method: 'POST',
@@ -67,7 +67,7 @@ export default {
         .catch(function(error) {
           console.log(error);
         });
-      this.$router.push('Login');
+      this.$router.push('Signup');
     },
     onReset(evt) {
       evt.preventDefault();

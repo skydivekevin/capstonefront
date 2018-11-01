@@ -52,7 +52,7 @@
           required
           v-model="form.currentDZ">
         </b-form-select>
-        <p>Can't find Dropzone? <router-link to="/AddDropzone">Add a Dropzone</router-link></p>
+        <p>Can't find Dropzone? <router-link to="/AddDropzone1">Add a Dropzone</router-link></p>
       </b-form-group>
     <b-form-group >
       <b-form-radio-group v-model="form.userType"
@@ -67,11 +67,11 @@
 </template>
 
 <script>
-import AddDropzone from './AddDropzone';
+import AddDropzone1 from './AddDropzone1';
 
 export default {
   components: {
-    AddDropzone
+    AddDropzone1
   },
   data() {
     return {
@@ -121,16 +121,15 @@ export default {
         body: form
       };
 
-      fetch(url, postOptions)
-        .then(function(response) {
-          return response.json();
-        })
-        .then(function(data) {
-          console.log(data);
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
+      fetch(url, postOptions).then(function(response) {
+        return response.json();
+      });
+      // .then(function(data) {
+      //   console.log(data);
+      // })
+      // .catch(function(error) {
+      //   console.log(error);
+      // });
       alert(
         `User ${this.form.userName} has been added! Redirecting to login page.`
       );

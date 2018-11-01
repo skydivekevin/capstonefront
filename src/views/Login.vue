@@ -72,4 +72,7 @@ export default {
 </script>
 
 <style scoped>
+btn {
+  color: black;
+}
 </style>
