@@ -59,7 +59,6 @@ export default {
     },
     onReset(evt) {
       evt.preventDefault();
-      /* Reset our form values */
       this.form.username = '';
       this.form.password = '';
       /* Trick to reset/clear native browser form validation state */

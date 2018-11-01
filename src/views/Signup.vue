@@ -7,9 +7,20 @@
         description="Please enter your desired username">
         <b-form-input id="username"
           type="text"
-          v-model="form.username"
+          v-model="form.userName"
           required
           placeholder="Enter username">
+        </b-form-input>
+      </b-form-group>
+      <b-form-group id="InputGroup2"
+        label="Password:"
+        label-for="password"
+        description="Please enter your desired password">
+        <b-form-input id="password"
+          type="text"
+          v-model="form.password"
+          required
+          placeholder="Enter password">
         </b-form-input>
       </b-form-group>
       <b-form-group id="firstNameGroup"
@@ -17,7 +28,7 @@
         label-for="firstName">
         <b-form-input id="firstName"
           type="text"
-          v-model="form.firstname"
+          v-model="form.firstName"
           required
           placeholder="First name">
         </b-form-input>
@@ -27,7 +38,7 @@
           label-for="lastName">
           <b-form-input id="lastName"
             type="text"
-            v-model="form.lastname"
+            v-model="form.lastName"
             required
             placeholder="Last name">
           </b-form-input>
@@ -35,19 +46,16 @@
       <b-form-group id="dropzoneGroup"
         label="Dropzone:"
         label-for="dropzone"
-        v-if='form.usertype === "instructor"'>
+        v-if='form.userType === "instructor"'>
         <b-form-select id="dropzone"
           :options="locations"
           required
-          v-model="form.dropzone">
+          v-model="form.currentDZ">
         </b-form-select>
         <p>Can't find Dropzone? <router-link to="/AddDropzone">Add a Dropzone</router-link></p>
-
-
       </b-form-group>
-
     <b-form-group >
-      <b-form-radio-group v-model="form.usertype"
+      <b-form-radio-group v-model="form.userType"
         :options="options"
         name="options">
       </b-form-radio-group>
@@ -69,11 +77,14 @@ export default {
     return {
       locations: [],
       form: {
-        username: '',
-        firstname: '',
-        lastname: '',
-        dropzone: null,
-        usertype: 'student'
+        userName: '',
+        firstName: '',
+        lastName: '',
+        currentDZ: null,
+        userType: 'student',
+        password: '',
+        bio: '',
+        photo: ''
       },
       selected: 'student',
       options: [
@@ -95,7 +106,39 @@ export default {
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
-      alert(JSON.stringify(this.form));
+      // console.log(JSON.stringify(this.form));
+
+      let form = JSON.stringify(this.form);
+      // console.log(form);
+      let username = this.form.userName;
+      // console.log(username);
+      const url = 'http://localhost:5000/users/' + username;
+      // console.log('URL: ' + url);
+
+      var postOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: form
+      };
+
+      fetch(url, postOptions)
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(data) {
+          console.log(data);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+      alert(
+        `User ${this.form.userName} has been added! Redirecting to login page.`
+      );
+      this.$router.push('Login');
+
+      // this.form.locationJumped = null;
+      // this.form.instructor = null;
+      // this.form.review = null;
     },
     onReset(evt) {
       evt.preventDefault();
