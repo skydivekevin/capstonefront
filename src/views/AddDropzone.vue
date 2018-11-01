@@ -25,7 +25,6 @@
     <b-button type="reset" variant="outline-primary">Reset</b-button>
       
     </b-form>
-    <router-link to="/writereview">Back to write a review</router-link>
   </div>
 </template>
 

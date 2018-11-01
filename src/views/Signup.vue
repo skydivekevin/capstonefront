@@ -41,7 +41,11 @@
           required
           v-model="form.dropzone">
         </b-form-select>
+        <p>Can't find Dropzone? <router-link to="/AddDropzone">Add a Dropzone</router-link></p>
+
+
       </b-form-group>
+
     <b-form-group >
       <b-form-radio-group v-model="form.usertype"
         :options="options"
@@ -55,7 +59,12 @@
 </template>
 
 <script>
+import AddDropzone from './AddDropzone';
+
 export default {
+  components: {
+    AddDropzone
+  },
   data() {
     return {
       locations: [],

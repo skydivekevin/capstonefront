@@ -8,6 +8,7 @@ import Writereview from './views/Writereview.vue'
 import Addinstructor from './views/Addinstructor.vue'
 import AddDropzone from './views/AddDropzone.vue'
 import DzPage from './views/DzPage.vue'
+import UserPage from './views/UserPage.vue'
 
 Vue.use(Router)
 
@@ -21,7 +22,8 @@ export default new Router({
     {
       path: '/login',
       name: 'login',
-      component: Login
+      component: Login,
+      props: true
     },
     {
       path: '/signup',
@@ -52,6 +54,17 @@ export default new Router({
       path: '/dzpage',
       name: 'dzpage',
       component: DzPage,
+    },
+    // {
+    //   path: '/UserPage',
+    //   name: 'UserPage',
+    //   component: UserPage,
+    // },
+    {
+      path: '/users/:userName/',
+      name: 'UserPage',
+      component: UserPage,
+      props: true
     },
   ]
 })

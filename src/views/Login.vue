@@ -6,7 +6,7 @@
                     label-for="exampleInput1">
         <b-form-input id="username"
                       type="text"
-                      v-model="form.username"
+                      v-model="form.userName"
                       required
                       placeholder="Enter username">
         </b-form-input>
@@ -32,7 +32,7 @@ export default {
   data() {
     return {
       form: {
-        username: '',
+        userName: '',
         password: ''
       },
       show: true
@@ -41,9 +41,21 @@ export default {
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
-      alert(JSON.stringify(this.form));
-      this.form.username = '';
-      this.form.password = '';
+      // alert(JSON.stringify(this.form));
+      let userName = this.form.userName;
+      let password = this.form.password;
+      // this.form.userName = '';
+      // this.form.password = '';
+      let apiURL = 'http://localhost:5000/users/' + userName + '/' + password;
+      fetch(apiURL)
+        .then(response => response.json())
+        .then(result => {
+          if (result.result.length < 1) {
+            alert('Incorrect information');
+          } else {
+            this.$router.push('users/:' + userName);
+          }
+        });
     },
     onReset(evt) {
       evt.preventDefault();

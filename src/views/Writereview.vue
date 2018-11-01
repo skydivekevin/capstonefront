@@ -4,15 +4,12 @@
       <b-form-group id="reviewerGroup"
         label="Your name:"
         label-for="reviewerName">
-
       <b-form-input v-model="form.reviewerName"
         type="text"
         placeholder="What's your name?"
         id="reviewerName">
         </b-form-input>
          </b-form-group>
-
-
       <b-form-group id="dropzoneGroup"
         label="Dropzone:"
         label-for="dropzone">
