@@ -10,6 +10,17 @@
         id="reviewerName">
         </b-form-input>
          </b-form-group>
+      <b-form-group id="dateGroup"
+        label="Date you jumped"
+        label-for="date">
+        <b-form-input v-model="form.date"
+        type="date"
+        placeholder="When did you jump?"
+        id="date">
+        </b-form-input>
+      </b-form-group>
+
+
       <b-form-group id="dropzoneGroup"
         label="Dropzone:"
         label-for="dropzone">

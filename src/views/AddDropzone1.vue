@@ -58,16 +58,14 @@ export default {
       };
 
       fetch(url, postOptions)
-        .then(function(response) {
-          return response.json();
-        })
-        .then(function(data) {
+        .then(response => response.json())
+        .then(data => {
           console.log(data);
+          this.$router.push('Signup');
         })
         .catch(function(error) {
           console.log(error);
         });
-      this.$router.push('Signup');
     },
     onReset(evt) {
       evt.preventDefault();

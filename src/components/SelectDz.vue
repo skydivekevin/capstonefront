@@ -24,29 +24,33 @@
     <b-form-group >
     </b-form-group>
     </b-form>
-    <div v-if='reviews.length > 0' v-for="(review, index) in reviews" v-bind:key='"review" + index' :review='review'>
-      <ul>
-        <li>{{review}}</li>
-        
-      </ul>
+  <div v-if='reviews.length > 0' v-for="(review, index) in reviews" v-bind:key='"review" + index' :review='review'>
+        <b-card-group deck>
+          <b-card header="Review"
+                  header-tag="header">
+                  <p class="card-text">Reviewed by {{review.reviewerName}}</p>
+                 <p class="card-text">{{review.reviewerName}} jumped at {{review.locationJumped}} on {{review.date}}</p>
+                 <p class="card-text">{{review.review}}</p>
+          
+        </b-card>
+        </b-card-group>
     </div>
   </div>
+
 </template>
 
 <script>
-// import ReviewCard from './ReviewCard';
 export default {
-  components: {
-    // ReviewCard
-  },
   data() {
     return {
       locations: [],
       instructors: [],
       reviews: [],
+      dates: [],
       form: {
         // dropzone: null
       },
+      props: ['reviews'],
       show: true
     };
   },
@@ -83,8 +87,12 @@ export default {
       fetch(apiURL)
         .then(response => response.json())
         .then(result => {
-          let answer = result.result.map(value => value.review);
-          this.reviews = answer;
+          console.log(result.result);
+          this.reviews = result.result;
+          // let answer = result.result.map(value => value.review);
+          // this.reviews = answer;
+          // let dateJumped = result.result.map(dateStamp => dateStamp.date);
+          // this.dates = dateJumped;
         });
     }
   }

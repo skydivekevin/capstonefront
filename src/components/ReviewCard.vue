@@ -1,5 +1,14 @@
 <template>
-      <li></li>
+<div>
+
+    <b-card-group deck>
+        <b-card header="Review date:  "
+                header-tag="header"
+                title="test" />
+    </b-card-group>
+</div>
+
+
 
 </template>
 
