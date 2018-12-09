@@ -89,10 +89,6 @@ export default {
         .then(result => {
           console.log(result.result);
           this.reviews = result.result;
-          // let answer = result.result.map(value => value.review);
-          // this.reviews = answer;
-          // let dateJumped = result.result.map(dateStamp => dateStamp.date);
-          // this.dates = dateJumped;
         });
     }
   }
